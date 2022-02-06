@@ -23,8 +23,8 @@ public class UsuarioDTO implements Serializable {
     //private List<Avaliacao> avaliacaoList;
     private int estrelas;
     // private List<Chat> chats;
-    @JsonIgnore(value = true)
-    private List<Servico> servicosPublicadosList;
+    //@JsonIgnore(value = true)
+    //private List<Servico> servicosPublicadosList;
     //private List<Contrato> contratadosList;
     //private List<Contrato> prestadosList;
 
@@ -41,7 +41,7 @@ public class UsuarioDTO implements Serializable {
         this.genero = entity.getGenero();
         this.telefone = entity.getTelefone();
         this.estrelas = entity.getEstrelas();
-        this.servicosPublicadosList = entity.getServicosPublicadosList();
+       // this.servicosPublicadosList = entity.getServicosPublicadosList();
     }
 
     public UsuarioDTO(Long id, String nome, String email, byte senha, Calendar dataNascimento, char genero, String telefone, int estrelas, List<Servico> servicosPublicadosList) {
@@ -53,7 +53,7 @@ public class UsuarioDTO implements Serializable {
         this.genero = genero;
         this.telefone = telefone;
         this.estrelas = estrelas;
-        this.servicosPublicadosList = servicosPublicadosList;
+       // this.servicosPublicadosList = servicosPublicadosList;
     }
 
     public Long getId() {
@@ -120,11 +120,11 @@ public class UsuarioDTO implements Serializable {
         this.estrelas = estrelas;
     }
 
-    public List<Servico> getServicosPublicadosList() {
+   /* public List<Servico> getServicosPublicadosList() {
         return servicosPublicadosList;
     }
 
     public void setServicosPublicadosList(List<Servico> servicosPublicadosList) {
         this.servicosPublicadosList = servicosPublicadosList;
-    }
+    }*/
 }

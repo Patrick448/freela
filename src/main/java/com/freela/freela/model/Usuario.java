@@ -22,7 +22,7 @@ public class Usuario {
     //private List<Avaliacao> avaliacaoList;
     private int estrelas;
     // private List<Chat> chats;
-    @OneToMany(mappedBy = "anunciante")
+    @OneToMany(mappedBy = "anunciante", fetch = FetchType.LAZY)
     private List<Servico> servicosPublicadosList;
     //private List<Contrato> contratadosList;
     //private List<Contrato> prestadosList;

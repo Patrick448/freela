@@ -1,22 +1,15 @@
-package com.freela.freela.model;
+package com.freela.freela.dto;
 
-import javax.persistence.*;
+import com.freela.freela.model.Servico;
+
 import java.util.Calendar;
 
-@Entity
-@Table(name="tb_services")
-public class Servico {
+public class ServicoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String titulo;
     String descrição;
-
-    //Usuario prestador;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "announcer_id")
-    Usuario anunciante;
+    UsuarioDTO anunciante;
     boolean buscaContratante;
     boolean buscaPrestador;
     Calendar data;
@@ -25,10 +18,38 @@ public class Servico {
     boolean concluido;
     boolean confirmado;
     boolean cancelado;
-    //List<Avaliacao> avaliacoes;
 
+    public ServicoDTO() {
+    }
 
-    public Servico() {
+    public ServicoDTO(int id, String titulo, String descrição, UsuarioDTO anunciante, boolean buscaContratante, boolean buscaPrestador, Calendar data, String local, float preco, boolean concluido, boolean confirmado, boolean cancelado) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descrição = descrição;
+        this.anunciante = anunciante;
+        this.buscaContratante = buscaContratante;
+        this.buscaPrestador = buscaPrestador;
+        this.data = data;
+        this.local = local;
+        this.preco = preco;
+        this.concluido = concluido;
+        this.confirmado = confirmado;
+        this.cancelado = cancelado;
+    }
+
+    public ServicoDTO(Servico entity) {
+        this.id = entity.getId();
+        this.titulo = entity.getTitulo();
+        this.descrição = entity.getDescrição();
+        this.anunciante = new UsuarioDTO(entity.getAnunciante());
+        this.buscaContratante = entity.isBuscaContratante();
+        this.buscaPrestador = entity.isBuscaPrestador();
+        this.data = entity.getData();
+        this.local = entity.getLocal();
+        this.preco = entity.getPreco();
+        this.concluido = entity.isConcluido();
+        this.confirmado = entity.isConfirmado();
+        this.cancelado = entity.isCancelado();
     }
 
     public int getId() {
@@ -54,21 +75,13 @@ public class Servico {
     public void setDescrição(String descrição) {
         this.descrição = descrição;
     }
-/*
-    public Usuario getPrestador() {
-        return prestador;
-    }
 
-    public void setPrestador(Usuario prestador) {
-        this.prestador = prestador;
-    }
-*/
-    public Usuario getAnunciante() {
+    public UsuarioDTO getAnunciante() {
         return anunciante;
     }
 
-    public void setAnunciante(Usuario contratante) {
-        this.anunciante = contratante;
+    public void setAnunciante(UsuarioDTO anunciante) {
+        this.anunciante = anunciante;
     }
 
     public boolean isBuscaContratante() {
@@ -94,23 +107,7 @@ public class Servico {
     public void setData(Calendar data) {
         this.data = data;
     }
-/*
-    public Calendar getDataContratação() {
-        return dataContratação;
-    }
 
-    public void setDataContratação(Calendar dataContratação) {
-        this.dataContratação = dataContratação;
-    }
-
-    public Calendar getDataPrestacao() {
-        return dataPrestacao;
-    }
-
-    public void setDataPrestacao(Calendar dataPrestacao) {
-        this.dataPrestacao = dataPrestacao;
-    }
-*/
     public String getLocal() {
         return local;
     }
@@ -150,37 +147,4 @@ public class Servico {
     public void setCancelado(boolean cancelado) {
         this.cancelado = cancelado;
     }
-/*
-    public List<Avaliacao> getAvaliacoes() {
-        return avaliacoes;
-    }
-
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;
-    }
-
-    public DadosPagamento getDadosPagamento() {
-        return dadosPagamento;
-    }
-
-    public void setDadosPagamento(DadosPagamento dadosPagamento) {
-        this.dadosPagamento = dadosPagamento;
-    }
-
-      void adicionarAvaliacao(Avaliacao avaliacao){
-        avaliacoes.add(avaliacao);
-    }
-*/
-
-    /*
-    void contratar(Usuario usuario){
-        if (buscaContratante) {
-            setAnunciante(usuario);
-
-        } else if (buscaPrestador){
-            setPrestador(usuario);
-        }
-    }*/
-
-
 }
