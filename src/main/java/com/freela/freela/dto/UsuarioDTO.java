@@ -1,17 +1,18 @@
-package com.freela.freela.model;
+package com.freela.freela.dto;
 
-import org.hibernate.annotations.Fetch;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.freela.freela.model.Servico;
+import com.freela.freela.model.Usuario;
 
-import javax.persistence.*;
+import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
-@Entity
-@Table(name="tb_users")
-public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UsuarioDTO implements Serializable {
+
+    private static final long serialVersionUID=1L;
     private Long id;
     private String nome;
     private String email;
@@ -22,23 +23,37 @@ public class Usuario {
     //private List<Avaliacao> avaliacaoList;
     private int estrelas;
     // private List<Chat> chats;
-    @OneToMany(mappedBy = "anunciante")
+    @JsonIgnore(value = true)
     private List<Servico> servicosPublicadosList;
     //private List<Contrato> contratadosList;
     //private List<Contrato> prestadosList;
 
-    public List<Servico> getServicosPublicadosList() {
-        return servicosPublicadosList;
+
+    public UsuarioDTO() {
     }
 
-    public void setServicosPublicadosList(List<Servico> servicosPublicadosList) {
+    public UsuarioDTO(Usuario entity) {
+        this.id = entity.getId();
+        this.nome = entity.getNome();
+        this.email = entity.getEmail();
+        this.senha = entity.getSenha();
+        this.dataNascimento = entity.getDataNascimento();
+        this.genero = entity.getGenero();
+        this.telefone = entity.getTelefone();
+        this.estrelas = entity.getEstrelas();
+        this.servicosPublicadosList = entity.getServicosPublicadosList();
+    }
+
+    public UsuarioDTO(Long id, String nome, String email, byte senha, Calendar dataNascimento, char genero, String telefone, int estrelas, List<Servico> servicosPublicadosList) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.telefone = telefone;
+        this.estrelas = estrelas;
         this.servicosPublicadosList = servicosPublicadosList;
-    }
-
-
-
-    public Usuario() {
-
     }
 
     public Long getId() {
@@ -97,14 +112,6 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-   /* public List<Avaliacao> getAvaliacaoList() {
-        return avaliacaoList;
-    }*/
-
-   /* public void setAvaliacaoList(List<Avaliacao> avaliacaoList) {
-        this.avaliacaoList = avaliacaoList;
-    }*/
-
     public int getEstrelas() {
         return estrelas;
     }
@@ -113,25 +120,11 @@ public class Usuario {
         this.estrelas = estrelas;
     }
 
-   /* public List<Chat> getChats() {
-        return chats;
-    }*/
-
-  /*  public void setChats(List<Chat> chats) {
-        this.chats = chats;
-    }*/
-
-    public void adicionarServico(Servico servico) {
-        this.servicosPublicadosList.add(servico);
+    public List<Servico> getServicosPublicadosList() {
+        return servicosPublicadosList;
     }
 
-    /*public void calcularEstrelas() {
-        int estrelasSoma = 0;
-        int cont = 0;
-        for(Avaliacao aval : this.avaliacaoList) {
-            estrelasSoma += aval.getEstrelas();
-            cont++;
-        }
-        this.estrelas = estrelasSoma / cont;
-    }*/
+    public void setServicosPublicadosList(List<Servico> servicosPublicadosList) {
+        this.servicosPublicadosList = servicosPublicadosList;
+    }
 }

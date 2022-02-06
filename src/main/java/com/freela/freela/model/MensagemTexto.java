@@ -1,3 +1,5 @@
+package com.freela.freela.model;
+
 public class MensagemTexto extends Mensagem {
     private String conteudo;
 

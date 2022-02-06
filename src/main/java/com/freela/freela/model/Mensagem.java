@@ -1,3 +1,5 @@
+package com.freela.freela.model;
+
 import java.util.Calendar;
 
 public class Mensagem {

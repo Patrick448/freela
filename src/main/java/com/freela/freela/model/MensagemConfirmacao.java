@@ -1,3 +1,5 @@
+package com.freela.freela.model;
+
 public class MensagemConfirmacao extends Mensagem {
     private Servico servico;
 

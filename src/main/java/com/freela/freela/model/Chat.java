@@ -1,3 +1,5 @@
+package com.freela.freela.model;
+
 import java.util.Calendar;
 import java.util.List;
 

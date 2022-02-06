@@ -1,25 +1,31 @@
-import java.util.Calendar;
-import java.util.List;
+package com.freela.freela.model;
 
+import javax.persistence.*;
+import java.util.Calendar;
+
+@Entity
+@Table(name="tb_services")
 public class Servico {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String titulo;
     String descrição;
-    Usuario prestador;
-    Usuario contratante;
+
+    //Usuario prestador;
+    @ManyToOne
+    @JoinColumn(name = "announcer_id")
+    Usuario anunciante;
     boolean buscaContratante;
     boolean buscaPrestador;
     Calendar dataPostagem;
-    Calendar dataContratação;
-    Calendar dataPrestacao;
     String local;
     float preco;
     boolean concluido;
     boolean confirmado;
     boolean cancelado;
-    List<Avaliacao> avaliacoes;
-    DadosPagamento dadosPagamento;
-
+    //List<Avaliacao> avaliacoes;
 
 
     public Servico() {
@@ -48,7 +54,7 @@ public class Servico {
     public void setDescrição(String descrição) {
         this.descrição = descrição;
     }
-
+/*
     public Usuario getPrestador() {
         return prestador;
     }
@@ -56,13 +62,13 @@ public class Servico {
     public void setPrestador(Usuario prestador) {
         this.prestador = prestador;
     }
-
-    public Usuario getContratante() {
-        return contratante;
+*/
+    public Usuario getAnunciante() {
+        return anunciante;
     }
 
-    public void setContratante(Usuario contratante) {
-        this.contratante = contratante;
+    public void setAnunciante(Usuario contratante) {
+        this.anunciante = contratante;
     }
 
     public boolean isBuscaContratante() {
@@ -88,7 +94,7 @@ public class Servico {
     public void setDataPostagem(Calendar dataPostagem) {
         this.dataPostagem = dataPostagem;
     }
-
+/*
     public Calendar getDataContratação() {
         return dataContratação;
     }
@@ -104,7 +110,7 @@ public class Servico {
     public void setDataPrestacao(Calendar dataPrestacao) {
         this.dataPrestacao = dataPrestacao;
     }
-
+*/
     public String getLocal() {
         return local;
     }
@@ -144,7 +150,7 @@ public class Servico {
     public void setCancelado(boolean cancelado) {
         this.cancelado = cancelado;
     }
-
+/*
     public List<Avaliacao> getAvaliacoes() {
         return avaliacoes;
     }
@@ -161,16 +167,20 @@ public class Servico {
         this.dadosPagamento = dadosPagamento;
     }
 
+      void adicionarAvaliacao(Avaliacao avaliacao){
+        avaliacoes.add(avaliacao);
+    }
+*/
+
+    /*
     void contratar(Usuario usuario){
         if (buscaContratante) {
-            setContratante(usuario);
+            setAnunciante(usuario);
 
         } else if (buscaPrestador){
             setPrestador(usuario);
         }
-    }
+    }*/
 
-    void adicionarAvaliacao(Avaliacao avaliacao){
-        avaliacoes.add(avaliacao);
-    }
+
 }
