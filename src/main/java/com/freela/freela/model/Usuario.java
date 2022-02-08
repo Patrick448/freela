@@ -1,5 +1,6 @@
 package com.freela.freela.model;
 
+import com.freela.freela.dto.UsuarioDTO;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
@@ -39,6 +40,18 @@ public class Usuario {
 
     public Usuario() {
 
+    }
+
+    public Usuario(UsuarioDTO dto) {
+        this.id = dto.getId();
+        this.nome = dto.getNome();
+        this.email = dto.getEmail();
+        this.senha = dto.getSenha();
+        this.dataNascimento = dto.getDataNascimento();
+        this.genero = dto.getGenero();
+        this.telefone = dto.getTelefone();
+        this.estrelas = dto.getEstrelas();
+        // this.servicosPublicadosList = entity.getServicosPublicadosList();
     }
 
     public Long getId() {

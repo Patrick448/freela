@@ -21,4 +21,9 @@ public class UsuarioService {
         List<Usuario> result = repository.findAll();
         return result.stream().map(entity -> new UsuarioDTO(entity)).collect(Collectors.toList());
     }
+
+    @Transactional
+    public Usuario save(Usuario entity){
+       return repository.save(entity);
+    }
 }
