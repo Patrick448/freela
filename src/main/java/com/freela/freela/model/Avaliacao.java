@@ -1,21 +1,30 @@
 package com.freela.freela.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 
+@Entity
+@Table(name="tb_ratings")
 public class Avaliacao {
-    String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     int estrelas;
     String texto;
     Calendar data;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Servico servico;
+
     public Avaliacao() {
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,5 +50,13 @@ public class Avaliacao {
 
     public void setData(Calendar data) {
         this.data = data;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 }

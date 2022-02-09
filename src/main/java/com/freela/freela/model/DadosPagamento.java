@@ -1,15 +1,24 @@
 package com.freela.freela.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 
+@Entity
+@Table(name="tb_dados_pagamento")
 public class DadosPagamento {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     String nomeTitular;
     String numero;
     Calendar validade;
     String cvv;
     int parcelas;
     float valorParcela;
+    @OneToOne
+    Usuario usuario;
+
 
     public DadosPagamento() {
     }
@@ -60,5 +69,21 @@ public class DadosPagamento {
 
     public void setValorParcela(float valorParcela) {
         this.valorParcela = valorParcela;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

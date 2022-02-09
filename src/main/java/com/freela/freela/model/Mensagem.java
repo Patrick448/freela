@@ -1,22 +1,29 @@
 package com.freela.freela.model;
 
+import javax.persistence.*;
 import java.util.Calendar;
 
+
+@Entity
+@Table(name="tb_messages")
 public class Mensagem {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int idRemetente;
     private Calendar dataEnvio;
+    @ManyToOne
     private Chat chat;
 
     public Mensagem() {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

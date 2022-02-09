@@ -22,11 +22,20 @@ public class Usuario {
     private String telefone;
     //private List<Avaliacao> avaliacaoList;
     private int estrelas;
-    // private List<Chat> chats;
+
+    @ManyToMany(mappedBy = "usuarioPair", fetch = FetchType.LAZY)
+    private List<Chat> chats;
     @OneToMany(mappedBy = "anunciante", fetch = FetchType.LAZY)
     private List<Servico> servicosPublicadosList;
-    //private List<Contrato> contratadosList;
-    //private List<Contrato> prestadosList;
+
+    @OneToMany(mappedBy = "contratante", fetch = FetchType.LAZY)
+    private List<Contrato> contratadosList;
+
+    @OneToMany(mappedBy = "prestador", fetch = FetchType.LAZY)
+    private List<Contrato> prestadosList;
+
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private DadosPagamento dadosPagamento;
 
     public List<Servico> getServicosPublicadosList() {
         return servicosPublicadosList;

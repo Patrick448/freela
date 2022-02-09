@@ -2,6 +2,7 @@ package com.freela.freela.model;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 @Table(name="tb_services")
@@ -9,7 +10,7 @@ public class Servico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
     String titulo;
     String descrição;
 
@@ -22,20 +23,24 @@ public class Servico {
     Calendar data;
     String local;
     float preco;
-    boolean concluido;
-    boolean confirmado;
-    boolean cancelado;
+
+    @OneToMany(mappedBy = "servico", fetch = FetchType.LAZY)
+    List<Avaliacao> avaliacoes;
+
+    @OneToMany(mappedBy = "servico", fetch = FetchType.LAZY)
+    List<Contrato> contratos;
+
     //List<Avaliacao> avaliacoes;
 
 
     public Servico() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -127,29 +132,29 @@ public class Servico {
         this.preco = preco;
     }
 
-    public boolean isConcluido() {
+    /*public boolean isConcluido() {
         return concluido;
-    }
+    }*/
 
-    public void setConcluido(boolean concluido) {
+    /*public void setConcluido(boolean concluido) {
         this.concluido = concluido;
-    }
+    }*/
 
-    public boolean isConfirmado() {
+    /*public boolean isConfirmado() {
         return confirmado;
-    }
+    }*/
 
-    public void setConfirmado(boolean confirmado) {
+    /*public void setConfirmado(boolean confirmado) {
         this.confirmado = confirmado;
-    }
+    }*/
 
-    public boolean isCancelado() {
+   /* public boolean isCancelado() {
         return cancelado;
-    }
+    }*/
 
-    public void setCancelado(boolean cancelado) {
+    /*public void setCancelado(boolean cancelado) {
         this.cancelado = cancelado;
-    }
+    }*/
 /*
     public List<Avaliacao> getAvaliacoes() {
         return avaliacoes;

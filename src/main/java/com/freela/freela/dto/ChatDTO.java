@@ -1,33 +1,41 @@
-package com.freela.freela.model;
+package com.freela.freela.dto;
 
-
-
-import org.springframework.data.util.Pair;
+import com.freela.freela.model.Chat;
+import com.freela.freela.model.Mensagem;
+import com.freela.freela.model.Usuario;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
 
-@Entity
-@Table(name="tb_chat")
-public class Chat {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ChatDTO implements Serializable {
+    private static final long serialVersionUID=1L;
     private Long id;
     private Calendar dataInicio;
-    //private Usuario user;
-    @ManyToMany
-    private Set<Usuario> usuarioPair;
+   // private Set<Usuario> usuarioPair;
+   // private List<Mensagem> mensagemList;
 
-    @OneToMany(mappedBy = "chat", fetch = FetchType.LAZY)
-    private List<Mensagem> mensagemList;
+    public ChatDTO() {
+
+    }
+
+    public ChatDTO(Long id, Calendar dataInicio) {
+        this.id = id;
+        this.dataInicio = dataInicio;
+    }
+
+    public ChatDTO(Chat entity) {
+        this.id = entity.getId();
+        this.dataInicio = entity.getDataInicio();
+    }
+
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -40,15 +48,7 @@ public class Chat {
         this.dataInicio = dataInicio;
     }
 
-  /*  public Usuario getUser() {
-        return user;
-    }*/
-
-   /* public void setUser(Usuario user) {
-        this.user = user;
-    }*/
-
-    public List<Mensagem> getMensagemList() {
+    /*public List<Mensagem> getMensagemList() {
         return mensagemList;
     }
 
@@ -66,5 +66,5 @@ public class Chat {
 
     public void setUsuarioPair(Set<Usuario> usuarioPair) {
         this.usuarioPair = usuarioPair;
-    }
+    }*/
 }

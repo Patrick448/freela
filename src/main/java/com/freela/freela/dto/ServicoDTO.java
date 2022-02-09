@@ -2,11 +2,13 @@ package com.freela.freela.dto;
 
 import com.freela.freela.model.Servico;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class ServicoDTO {
+public class ServicoDTO implements Serializable {
 
-    int id;
+    private static final long serialVersionUID=1L;
+    Long id;
     String titulo;
     String descrição;
     UsuarioDTO anunciante;
@@ -15,14 +17,12 @@ public class ServicoDTO {
     Calendar data;
     String local;
     float preco;
-    boolean concluido;
-    boolean confirmado;
-    boolean cancelado;
+
 
     public ServicoDTO() {
     }
 
-    public ServicoDTO(int id, String titulo, String descrição, UsuarioDTO anunciante, boolean buscaContratante, boolean buscaPrestador, Calendar data, String local, float preco, boolean concluido, boolean confirmado, boolean cancelado) {
+    public ServicoDTO(Long id, String titulo, String descrição, UsuarioDTO anunciante, boolean buscaContratante, boolean buscaPrestador, Calendar data, String local, float preco) {
         this.id = id;
         this.titulo = titulo;
         this.descrição = descrição;
@@ -32,9 +32,7 @@ public class ServicoDTO {
         this.data = data;
         this.local = local;
         this.preco = preco;
-        this.concluido = concluido;
-        this.confirmado = confirmado;
-        this.cancelado = cancelado;
+
     }
 
     public ServicoDTO(Servico entity) {
@@ -47,16 +45,13 @@ public class ServicoDTO {
         this.data = entity.getData();
         this.local = entity.getLocal();
         this.preco = entity.getPreco();
-        this.concluido = entity.isConcluido();
-        this.confirmado = entity.isConfirmado();
-        this.cancelado = entity.isCancelado();
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -124,27 +119,5 @@ public class ServicoDTO {
         this.preco = preco;
     }
 
-    public boolean isConcluido() {
-        return concluido;
-    }
 
-    public void setConcluido(boolean concluido) {
-        this.concluido = concluido;
-    }
-
-    public boolean isConfirmado() {
-        return confirmado;
-    }
-
-    public void setConfirmado(boolean confirmado) {
-        this.confirmado = confirmado;
-    }
-
-    public boolean isCancelado() {
-        return cancelado;
-    }
-
-    public void setCancelado(boolean cancelado) {
-        this.cancelado = cancelado;
-    }
 }
