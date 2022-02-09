@@ -1,11 +1,8 @@
 package com.freela.freela.services;
 
 import com.freela.freela.dto.ServicoDTO;
-import com.freela.freela.dto.UsuarioDTO;
 import com.freela.freela.model.Servico;
-import com.freela.freela.model.Usuario;
 import com.freela.freela.repositories.ServicoRepository;
-import com.freela.freela.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
