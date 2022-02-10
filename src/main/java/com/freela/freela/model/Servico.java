@@ -1,5 +1,7 @@
 package com.freela.freela.model;
 
+import com.freela.freela.dto.ServicoDTO;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.List;
@@ -12,7 +14,7 @@ public class Servico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String titulo;
-    String descrição;
+    String descricao;
 
     //Usuario prestador;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,6 +38,18 @@ public class Servico {
     public Servico() {
     }
 
+    public Servico(ServicoDTO servicoDTO) {
+        this.id = servicoDTO.getId();
+        this.titulo = servicoDTO.getTitulo();
+        this.descricao = servicoDTO.getDescricao();
+        //this.anunciante = new Usuario(servicoDTO.getAnunciante());
+        this.buscaContratante = servicoDTO.isBuscaContratante();
+        this.buscaPrestador = servicoDTO.isBuscaPrestador();
+        this.data = servicoDTO.getData();
+        this.local = servicoDTO.getLocal();
+        this.preco = servicoDTO.getPreco();
+    }
+
     public Long getId() {
         return id;
     }
@@ -52,12 +66,12 @@ public class Servico {
         this.titulo = titulo;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descrição) {
+        this.descricao = descrição;
     }
 /*
     public Usuario getPrestador() {

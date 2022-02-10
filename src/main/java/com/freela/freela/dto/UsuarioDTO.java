@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class UsuarioDTO implements Serializable {
@@ -23,8 +24,8 @@ public class UsuarioDTO implements Serializable {
     //private List<Avaliacao> avaliacaoList;
     private int estrelas;
     // private List<Chat> chats;
-    //@JsonIgnore(value = true)
-    //private List<Servico> servicosPublicadosList;
+    @JsonIgnore(value = true)
+    private List<ServicoDTO> servicosPublicadosList;
     //private List<Contrato> contratadosList;
     //private List<Contrato> prestadosList;
 
@@ -41,10 +42,12 @@ public class UsuarioDTO implements Serializable {
         this.genero = entity.getGenero();
         this.telefone = entity.getTelefone();
         this.estrelas = entity.getEstrelas();
+        //this.servicosPublicadosList = entity.getServicosPublicadosList().stream()
+          //      .map(x -> new ServicoDTO(x)).collect(Collectors.toList());
        // this.servicosPublicadosList = entity.getServicosPublicadosList();
     }
 
-    public UsuarioDTO(Long id, String nome, String email, byte senha, Calendar dataNascimento, char genero, String telefone, int estrelas, List<Servico> servicosPublicadosList) {
+    public UsuarioDTO(Long id, String nome, String email, byte senha, Calendar dataNascimento, char genero, String telefone, int estrelas, List<ServicoDTO> servicosPublicadosList) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -53,7 +56,7 @@ public class UsuarioDTO implements Serializable {
         this.genero = genero;
         this.telefone = telefone;
         this.estrelas = estrelas;
-       // this.servicosPublicadosList = servicosPublicadosList;
+       this.servicosPublicadosList = servicosPublicadosList;
     }
 
     public Long getId() {
@@ -120,11 +123,11 @@ public class UsuarioDTO implements Serializable {
         this.estrelas = estrelas;
     }
 
-   /* public List<Servico> getServicosPublicadosList() {
+   public List<ServicoDTO> getServicosPublicadosList() {
         return servicosPublicadosList;
     }
 
-    public void setServicosPublicadosList(List<Servico> servicosPublicadosList) {
+    public void setServicosPublicadosList(List<ServicoDTO> servicosPublicadosList) {
         this.servicosPublicadosList = servicosPublicadosList;
-    }*/
+    }
 }

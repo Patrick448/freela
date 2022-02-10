@@ -1,5 +1,6 @@
 package com.freela.freela.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.freela.freela.model.Servico;
 
 import java.io.Serializable;
@@ -10,22 +11,24 @@ public class ServicoDTO implements Serializable {
     private static final long serialVersionUID=1L;
     Long id;
     String titulo;
-    String descrição;
+    String descricao;
+    @JsonIgnore
     UsuarioDTO anunciante;
     boolean buscaContratante;
     boolean buscaPrestador;
     Calendar data;
     String local;
     float preco;
+    Long anuncianteId;
 
 
     public ServicoDTO() {
     }
 
-    public ServicoDTO(Long id, String titulo, String descrição, UsuarioDTO anunciante, boolean buscaContratante, boolean buscaPrestador, Calendar data, String local, float preco) {
+    public ServicoDTO(Long id, String titulo, String descricao, UsuarioDTO anunciante, boolean buscaContratante, boolean buscaPrestador, Calendar data, String local, float preco) {
         this.id = id;
         this.titulo = titulo;
-        this.descrição = descrição;
+        this.descricao = descricao;
         this.anunciante = anunciante;
         this.buscaContratante = buscaContratante;
         this.buscaPrestador = buscaPrestador;
@@ -35,16 +38,37 @@ public class ServicoDTO implements Serializable {
 
     }
 
+    public ServicoDTO(Long id, String titulo, String descricao, UsuarioDTO anunciante, boolean buscaContratante, boolean buscaPrestador, Calendar data, String local, float preco, Long anuncianteId) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.anunciante = anunciante;
+        this.buscaContratante = buscaContratante;
+        this.buscaPrestador = buscaPrestador;
+        this.data = data;
+        this.local = local;
+        this.preco = preco;
+        this.anuncianteId = anuncianteId;
+    }
+
     public ServicoDTO(Servico entity) {
         this.id = entity.getId();
         this.titulo = entity.getTitulo();
-        this.descrição = entity.getDescrição();
-        this.anunciante = new UsuarioDTO(entity.getAnunciante());
+        this.descricao = entity.getDescricao();
+        //this.anunciante = new UsuarioDTO(entity.getAnunciante());
         this.buscaContratante = entity.isBuscaContratante();
         this.buscaPrestador = entity.isBuscaPrestador();
         this.data = entity.getData();
         this.local = entity.getLocal();
         this.preco = entity.getPreco();
+    }
+
+    public Long getAnuncianteId() {
+        return anuncianteId;
+    }
+
+    public void setAnuncianteId(Long anuncianteId) {
+        this.anuncianteId = anuncianteId;
     }
 
     public Long getId() {
@@ -63,12 +87,12 @@ public class ServicoDTO implements Serializable {
         this.titulo = titulo;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public UsuarioDTO getAnunciante() {

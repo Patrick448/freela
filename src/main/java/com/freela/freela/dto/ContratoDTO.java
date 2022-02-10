@@ -1,23 +1,19 @@
-package com.freela.freela.model;
+package com.freela.freela.dto;
+
+import com.freela.freela.model.Contrato;
+import com.freela.freela.model.Servico;
+import com.freela.freela.model.Usuario;
 
 import javax.persistence.*;
 import java.util.Calendar;
 
-@Entity
-@Table(name="tb_contracts")
-public class Contrato {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ContratoDTO {
     Long id;
     String titulo;
     String descrição;
-    @ManyToOne(fetch = FetchType.LAZY)
     Usuario prestador;
-    @ManyToOne(fetch = FetchType.LAZY)
     Usuario contratante;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    Servico servico;
+    ServicoDTO servico;
     boolean buscaContratante;
     boolean buscaPrestador;
     Calendar dataContratação;
@@ -28,11 +24,11 @@ public class Contrato {
     int parcelas;
     float valorParcela;
 
-    public Contrato() {
+    public ContratoDTO() {
     }
 
 
-    public Contrato(Long id, String titulo, String descrição, Usuario prestador, Usuario contratante, Servico servico, boolean buscaContratante, boolean buscaPrestador, Calendar dataContratação, Calendar dataPrestacao, boolean concluido, boolean confirmado, boolean cancelado, int parcelas, float valorParcela) {
+    public ContratoDTO(Long id, String titulo, String descrição, Usuario prestador, Usuario contratante, ServicoDTO servico, boolean buscaContratante, boolean buscaPrestador, Calendar dataContratação, Calendar dataPrestacao, boolean concluido, boolean confirmado, boolean cancelado, int parcelas, float valorParcela) {
         this.id = id;
         this.titulo = titulo;
         this.descrição = descrição;
@@ -48,6 +44,24 @@ public class Contrato {
         this.cancelado = cancelado;
         this.parcelas = parcelas;
         this.valorParcela = valorParcela;
+    }
+
+    public ContratoDTO(Contrato entity) {
+        this.id = entity.getId();
+        this.titulo = entity.getTitulo();
+        this.descrição = entity.getDescrição();
+        this.prestador = entity.getPrestador();
+        this.contratante = entity.getContratante();
+        this.servico = new ServicoDTO(entity.getServico());
+        this.buscaContratante = entity.isBuscaContratante();
+        this.buscaPrestador = entity.isBuscaPrestador();
+        this.dataContratação = entity.getDataContratação();
+        this.dataPrestacao = entity.getDataPrestacao();
+        this.concluido = entity.isConcluido();
+        this.confirmado = entity.isConfirmado();
+        this.cancelado = entity.isCancelado();
+        this.parcelas = entity.getParcelas();
+        this.valorParcela = entity.getValorParcela();
     }
 
     public Long getId() {
@@ -160,13 +174,5 @@ public class Contrato {
 
     public void setValorParcela(float valorParcela) {
         this.valorParcela = valorParcela;
-    }
-
-    public Servico getServico() {
-        return servico;
-    }
-
-    public void setServico(Servico servico) {
-        this.servico = servico;
     }
 }
