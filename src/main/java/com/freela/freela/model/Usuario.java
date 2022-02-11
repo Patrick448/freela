@@ -1,6 +1,7 @@
 package com.freela.freela.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.freela.freela.dto.UsuarioDTO;
 import org.hibernate.annotations.Fetch;
 
@@ -23,6 +24,7 @@ public class Usuario {
     private String email;
     @NotEmpty
     @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
     private Calendar dataNascimento;
     private char genero;

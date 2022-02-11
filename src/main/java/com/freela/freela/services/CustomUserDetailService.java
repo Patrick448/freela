@@ -1,5 +1,6 @@
 package com.freela.freela.services;
 
+import com.freela.freela.data.CustomUserDetails;
 import com.freela.freela.model.Usuario;
 import com.freela.freela.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,11 @@ public class CustomUserDetailService implements UserDetailsService {
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
         List<GrantedAuthority> authorityListAdmin = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
         List<GrantedAuthority> authorityListUser = AuthorityUtils.createAuthorityList("ROLE_USER");
-        return new User(usuario.getEmail(), usuario.getSenha(), usuario.isAdmin() ? authorityListAdmin : authorityListUser);
+
+        CustomUserDetails userDetails = new CustomUserDetails(Optional.of(usuario));
+        userDetails.setAuthorities(usuario.isAdmin() ? authorityListAdmin : authorityListUser);
+        return userDetails;
+       // return new User(usuario.getEmail(), usuario.getSenha(), usuario.isAdmin() ? authorityListAdmin : authorityListUser);
     }
 
 }
