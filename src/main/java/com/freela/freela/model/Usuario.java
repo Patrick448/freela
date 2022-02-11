@@ -1,9 +1,11 @@
 package com.freela.freela.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.freela.freela.dto.UsuarioDTO;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,14 +16,20 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String nome;
+    @NotEmpty
+    @Column(unique = true)
     private String email;
-    private byte senha;
+    @NotEmpty
+    @JsonIgnore
+    private String senha;
     private Calendar dataNascimento;
     private char genero;
     private String telefone;
     //private List<Avaliacao> avaliacaoList;
     private int estrelas;
+    private boolean admin;
 
     @ManyToMany(mappedBy = "usuarioPair", fetch = FetchType.LAZY)
     private List<Chat> chats;
@@ -60,7 +68,12 @@ public class Usuario {
         this.genero = dto.getGenero();
         this.telefone = dto.getTelefone();
         this.estrelas = dto.getEstrelas();
+        this.admin = dto.isAdmin();
         // this.servicosPublicadosList = entity.getServicosPublicadosList();
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public Long getId() {
@@ -69,6 +82,10 @@ public class Usuario {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 
     public String getNome() {
@@ -87,11 +104,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public byte getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(byte senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 
