@@ -28,6 +28,12 @@ public class UsuarioController {
         return ResponseEntity.ok(list);
     }
 
+    @GetMapping(value = "/get-user")
+    public ResponseEntity<UsuarioDTO> getCurrentUser(@AuthenticationPrincipal String userDetails){
+        System.out.println(userDetails);
+        UsuarioDTO usuarioDTO = service.findByEmail(userDetails);
+        return ResponseEntity.ok(usuarioDTO);
+    }
 
     @PostMapping(value = "/register",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},

@@ -33,6 +33,16 @@ public class UsuarioService {
         return new UsuarioDTO(usuario.get());
     }
 
+    @Transactional(readOnly = true)
+    public UsuarioDTO findByEmail(String email){
+        Optional<Usuario> usuario = Optional.ofNullable(repository.findByEmail(email));
+
+        if(usuario.isEmpty()){
+            return null;
+        }
+        return new UsuarioDTO(usuario.get());
+    }
+
     @Transactional
     public Usuario save(Usuario entity){
        return repository.save(entity);
