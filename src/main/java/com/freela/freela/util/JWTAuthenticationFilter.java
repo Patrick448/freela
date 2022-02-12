@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 
@@ -35,9 +36,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+
         try {
+            //System.out.println(request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+
             UsuarioDTO usuario = new ObjectMapper()
                     .readValue(request.getInputStream(), UsuarioDTO.class);
+
 
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     usuario.getEmail(),
