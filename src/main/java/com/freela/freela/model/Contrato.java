@@ -10,7 +10,7 @@ public class Contrato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String titulo;
-    String descrição;
+    String descricao;
     @ManyToOne(fetch = FetchType.LAZY)
     Usuario prestador;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -20,7 +20,7 @@ public class Contrato {
     Servico servico;
     boolean buscaContratante;
     boolean buscaPrestador;
-    Calendar dataContratação;
+    Calendar dataContratacao;
     Calendar dataPrestacao;
     boolean concluido;
     boolean confirmado;
@@ -32,16 +32,16 @@ public class Contrato {
     }
 
 
-    public Contrato(Long id, String titulo, String descrição, Usuario prestador, Usuario contratante, Servico servico, boolean buscaContratante, boolean buscaPrestador, Calendar dataContratação, Calendar dataPrestacao, boolean concluido, boolean confirmado, boolean cancelado, int parcelas, float valorParcela) {
+    public Contrato(Long id, String titulo, String descricao, Usuario prestador, Usuario contratante, Servico servico, boolean buscaContratante, boolean buscaPrestador, Calendar dataContratacao, Calendar dataPrestacao, boolean concluido, boolean confirmado, boolean cancelado, int parcelas, float valorParcela) {
         this.id = id;
         this.titulo = titulo;
-        this.descrição = descrição;
+        this.descricao = descricao;
         this.prestador = prestador;
         this.contratante = contratante;
         this.servico = servico;
         this.buscaContratante = buscaContratante;
         this.buscaPrestador = buscaPrestador;
-        this.dataContratação = dataContratação;
+        this.dataContratacao = dataContratacao;
         this.dataPrestacao = dataPrestacao;
         this.concluido = concluido;
         this.confirmado = confirmado;
@@ -66,12 +66,12 @@ public class Contrato {
         this.titulo = titulo;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Usuario getPrestador() {
@@ -106,12 +106,12 @@ public class Contrato {
         this.buscaPrestador = buscaPrestador;
     }
 
-    public Calendar getDataContratação() {
-        return dataContratação;
+    public Calendar getDataContratacao() {
+        return dataContratacao;
     }
 
-    public void setDataContratação(Calendar dataContratação) {
-        this.dataContratação = dataContratação;
+    public void setDataContratacao(Calendar dataContratacao) {
+        this.dataContratacao = dataContratacao;
     }
 
     public Calendar getDataPrestacao() {
