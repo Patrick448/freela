@@ -14,6 +14,7 @@ public class Servico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String titulo;
+    @Column(columnDefinition="TEXT")
     String descricao;
 
     //Usuario prestador;

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,10 +34,10 @@ public class ServicoController {
     @PostMapping(value = "/register",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity resgisterService(@RequestBody ServicoDTO servicoDTO){
+    public ResponseEntity resgisterService(@RequestBody ServicoDTO servicoDTO, @AuthenticationPrincipal String username){
 
         Servico servicoFromDTO = new Servico(servicoDTO);
-        UsuarioDTO anuncianteDTO = usuarioService.findById(servicoDTO.getAnuncianteId());
+        UsuarioDTO anuncianteDTO = usuarioService.findByEmail(username);
         servicoFromDTO.setAnunciante(new Usuario(anuncianteDTO));
 
 
