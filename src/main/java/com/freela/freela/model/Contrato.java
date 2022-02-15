@@ -1,5 +1,8 @@
 package com.freela.freela.model;
 
+import com.freela.freela.dto.ContratoDTO;
+import com.freela.freela.dto.ServicoDTO;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -48,6 +51,17 @@ public class Contrato {
         this.cancelado = cancelado;
         this.parcelas = parcelas;
         this.valorParcela = valorParcela;
+    }
+
+    public Contrato(ContratoDTO contratoDTO) {
+        this.id = contratoDTO.getId();
+        this.dataContratacao = contratoDTO.getDataContratacao();
+        this.dataPrestacao = contratoDTO.getDataPrestacao();
+        this.concluido = contratoDTO.isConcluido();
+        this.confirmado = contratoDTO.isConfirmado();
+        this.cancelado = contratoDTO.isCancelado();
+        this.parcelas = contratoDTO.getParcelas();
+        this.valorParcela = contratoDTO.getValorParcela();
     }
 
     public Long getId() {

@@ -1,17 +1,23 @@
 package com.freela.freela.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.freela.freela.model.Contrato;
 import com.freela.freela.model.Servico;
 import com.freela.freela.model.Usuario;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class ContratoDTO {
+public class ContratoDTO implements Serializable {
+    private static final long serialVersionUID=1L;
+
     Long id;
     String titulo;
     String descricao;
+    @JsonIgnore
     Usuario prestador;
+    @JsonIgnore
     Usuario contratante;
     ServicoDTO servico;
     boolean buscaContratante;
@@ -23,10 +29,37 @@ public class ContratoDTO {
     boolean cancelado;
     int parcelas;
     float valorParcela;
+    Long prestadorId;
+    Long contratanteId;
+    Long servicoId;
 
     public ContratoDTO() {
     }
 
+
+    public Long getPrestadorId() {
+        return prestadorId;
+    }
+
+    public void setPrestadorId(Long prestadorId) {
+        this.prestadorId = prestadorId;
+    }
+
+    public Long getContratanteId() {
+        return contratanteId;
+    }
+
+    public void setContratanteId(Long contratanteId) {
+        this.contratanteId = contratanteId;
+    }
+
+    public Long getServicoId() {
+        return servicoId;
+    }
+
+    public void setServicoId(Long servicoId) {
+        this.servicoId = servicoId;
+    }
 
     public ContratoDTO(Long id, String titulo, String descricao, Usuario prestador, Usuario contratante, ServicoDTO servico, boolean buscaContratante, boolean buscaPrestador, Calendar dataContratacao, Calendar dataPrestacao, boolean concluido, boolean confirmado, boolean cancelado, int parcelas, float valorParcela) {
         this.id = id;
@@ -62,6 +95,9 @@ public class ContratoDTO {
         this.cancelado = entity.isCancelado();
         this.parcelas = entity.getParcelas();
         this.valorParcela = entity.getValorParcela();
+        this.prestadorId = entity.getPrestador().getId();
+        this.contratanteId = entity.getContratante().getId();
+        this.servicoId = entity.getServico().getId();
     }
 
     public Long getId() {

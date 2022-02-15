@@ -1,7 +1,9 @@
 package com.freela.freela.services;
 
 import com.freela.freela.dto.ServicoDTO;
+import com.freela.freela.dto.UsuarioDTO;
 import com.freela.freela.model.Servico;
+import com.freela.freela.model.Usuario;
 import com.freela.freela.repositories.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,6 +44,16 @@ public class ServicoService {
             result= repository.findServicesLookingForProviders(pageable);
         }
         return result.map(entity -> new ServicoDTO(entity));
+    }
+
+    @Transactional(readOnly = true)
+    public ServicoDTO findById(Long id){
+        Optional<Servico> servico = repository.findById(id);
+
+        if(servico.isEmpty()){
+            return null;
+        }
+        return new ServicoDTO(servico.get());
     }
 
     @Transactional

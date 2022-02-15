@@ -61,6 +61,7 @@ public class ServicoDTO implements Serializable {
         this.data = entity.getData();
         this.local = entity.getLocal();
         this.preco = entity.getPreco();
+        this.anuncianteId = entity.getAnunciante().getId();
     }
 
     public Long getAnuncianteId() {
