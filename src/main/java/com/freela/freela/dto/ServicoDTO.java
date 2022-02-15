@@ -55,7 +55,7 @@ public class ServicoDTO implements Serializable {
         this.id = entity.getId();
         this.titulo = entity.getTitulo();
         this.descricao = entity.getDescricao();
-        //this.anunciante = new UsuarioDTO(entity.getAnunciante());
+        this.anunciante = new UsuarioDTO(entity.getAnunciante());
         this.buscaContratante = entity.isBuscaContratante();
         this.buscaPrestador = entity.isBuscaPrestador();
         this.data = entity.getData();

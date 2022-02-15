@@ -1,9 +1,11 @@
 package com.freela.freela.controllers;
 
+import com.freela.freela.dto.ContratoDTO;
 import com.freela.freela.dto.ServicoDTO;
 import com.freela.freela.dto.UsuarioDTO;
 import com.freela.freela.model.Servico;
 import com.freela.freela.model.Usuario;
+import com.freela.freela.services.ContratoService;
 import com.freela.freela.services.ServicoService;
 import com.freela.freela.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +19,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/services")
-public class ServicoController {
+@RequestMapping(value = "/contracts")
+public class ContratoController {
 
     @Autowired
-    private ServicoService service;
-    @Autowired
-    private UsuarioService usuarioService;
+    private ContratoService service;
 
     @GetMapping
-    public ResponseEntity<Page<ServicoDTO>> findAll(Pageable pageable, @RequestParam boolean buscaContrante){
-        System.out.println("Returning services");
-        System.out.println(pageable);
-        Page<ServicoDTO> list = service.findServicoByType(pageable, buscaContrante);
+    public ResponseEntity<List<ContratoDTO>> findAll(Pageable pageable){
+        System.out.println("Returning contracts");
+
+        List<ContratoDTO> list = service.findAll();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping(value="/current-user")
-    public ResponseEntity<List<ServicoDTO>> findAllCurrentUser(Pageable pageable, @AuthenticationPrincipal String username){
+    public ResponseEntity<List<ContratoDTO>> findAllCurrentUser(@AuthenticationPrincipal String username){
         System.out.println("Returning services of this user");
-        List<ServicoDTO> list = service.findServicesByUserEmail(username);
+        List<ContratoDTO> list = service.findContractsByUserEmail(username);
         return ResponseEntity.ok(list);
     }
 
 
-
+/*
     @PutMapping(value = "/register",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -60,5 +60,5 @@ public class ServicoController {
         }
 
         return ResponseEntity.ok().build();
-    }
+    }*/
 }
