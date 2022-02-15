@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -42,7 +43,7 @@ public class ServicoController {
 
 
 
-    @PutMapping(value = "/register",
+    @PostMapping(value = "/register",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity resgisterService(@RequestBody ServicoDTO servicoDTO, @AuthenticationPrincipal String username){
@@ -50,6 +51,7 @@ public class ServicoController {
         Servico servicoFromDTO = new Servico(servicoDTO);
         UsuarioDTO anuncianteDTO = usuarioService.findByEmail(username);
         servicoFromDTO.setAnunciante(new Usuario(anuncianteDTO));
+        servicoFromDTO.setData(Calendar.getInstance());
 
 
         try {

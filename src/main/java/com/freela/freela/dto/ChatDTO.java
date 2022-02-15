@@ -17,6 +17,8 @@ public class ChatDTO implements Serializable {
     private Calendar dataInicio;
    // private Set<Usuario> usuarioPair;
    // private List<Mensagem> mensagemList;
+    private Long idUser1;
+    private Long idUser2;
 
     public ChatDTO() {
 
@@ -46,6 +48,22 @@ public class ChatDTO implements Serializable {
 
     public void setDataInicio(Calendar dataInicio) {
         this.dataInicio = dataInicio;
+    }
+
+    public Long getIdUser1() {
+        return idUser1;
+    }
+
+    public void setIdUser1(Long idUser1) {
+        this.idUser1 = idUser1;
+    }
+
+    public Long getIdUser2() {
+        return idUser2;
+    }
+
+    public void setIdUser2(Long idUser2) {
+        this.idUser2 = idUser2;
     }
 
     /*public List<Mensagem> getMensagemList() {
